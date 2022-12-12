@@ -1,992 +1,951 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link rel="icon" type="image/png" href="/static/images/stock.ico">
   <meta name="viewport" content="initial-scale=0.1">
   <title>Stock Market Ticker Trends</title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link rel="stylesheet" href="/static/css/base.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-  <link rel="styleIHUBsheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="styleIHUBsheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css" />
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
 </head>
-  <body class="">
+
+<body class="">
   <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
     <div class="container">
-      <a href="/" class="navbar-brand">
+      <a class="navbar-brand">
         <!-- Logo Image -->
         <img src="/static/images/powell.png" width="80" alt="" class="d-inline-block align-middle mr-2">
         <!-- Logo Text -->
-        <span class="text-uppercase font-weight-bold">Stock Ticker Trends</span>
+        <span class="text-uppercase font-weight-bold">Reddit Stock Ticker Trends</span>
       </a>
 
-      <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
-
-      <div id="navbarSupportedContent" class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a href="/" class="nav-link">Home <span class="sr-only">(current)</span></a></li>
-          <li class="nav-item"><a href="/trends/hits/" class="nav-link">Reddit</a></li>
-          <li class="nav-item"><a href="/trends/twitter/" class="nav-link">Twitter</a></li>
-          <li class="nav-item"><a href="/trends/ihub/" class="nav-link">I-Hub</a></li>
-        </ul>
-      </div>
+      <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+        class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
     </div>
   </nav>
 
-    <div class="container menu-margin">
-      
-      
-        <div class="content">
-          
+  <div class="container menu-margin">
 
 
-          
-<h2>Reddit Ticker Trends</h2>
- <canvas id="myChart" width="300" height="75"></canvas>
- <canvas id="mySecondChart" width="300" height="75"></canvas>
-<table class="table table-striped" style="width:50%, text-align: center">
-  <tr>
-    <th>Symbol</th>
-    <th>Full Name</th>
-    <th>Hits (Past 12 Hrs)</th>
-  </tr>
-    
-  <tr>
-    <td><div>V</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=V">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/V">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Visa Inc.</td>
-    <td>22</td>
-  </tr>
-  
-  <tr>
-    <td><div>BABA</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=BABA">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/BABA">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Alibaba Group Holding Limited American Depositary Shares each representing eight Ordinary share</td>
-    <td>22</td>
-  </tr>
-  
-  <tr>
-    <td><div>QQQ</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=QQQ">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/QQQ">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Invesco QQQ</td>
-    <td>20</td>
-  </tr>
-  
-  <tr>
-    <td><div>AAPL</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=AAPL">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/AAPL">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Apple Inc. Common Stock</td>
-    <td>19</td>
-  </tr>
-  
-  <tr>
-    <td><div>T</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=T">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/T">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>AT&amp;T Inc.</td>
-    <td>18</td>
-  </tr>
-  
-  <tr>
-    <td><div>USD</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=USD">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/USD">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>ProShares Ultra Semiconductors</td>
-    <td>17</td>
-  </tr>
-  
-  <tr>
-    <td><div>GME</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=GME">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/GME">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>GameStop Corporation Common Stock</td>
-    <td>16</td>
-  </tr>
-  
-  <tr>
-    <td><div>TSLA</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=TSLA">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/TSLA">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Tesla Inc. Common Stock</td>
-    <td>16</td>
-  </tr>
-  
-  <tr>
-    <td><div>TA</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=TA">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/TA">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>TravelCenters of America Inc. Common Stock</td>
-    <td>15</td>
-  </tr>
-  
-  <tr>
-    <td><div>CRSR</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=CRSR">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/CRSR">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Corsair Gaming Inc. Common Stock</td>
-    <td>15</td>
-  </tr>
-  
-  <tr>
-    <td><div>ATH</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=ATH">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/ATH">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Athene Holding Ltd. Class A Common Shares</td>
-    <td>14</td>
-  </tr>
-  
-  <tr>
-    <td><div>USA</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=USA">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/USA">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Liberty All-Star Equity Fund Common Stock</td>
-    <td>14</td>
-  </tr>
-  
-  <tr>
-    <td><div>CEO</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=CEO">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/CEO">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>CNOOC Limited Common Stock</td>
-    <td>12</td>
-  </tr>
-  
-  <tr>
-    <td><div>SWBI</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=SWBI">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/SWBI">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Smith &amp; Wesson Brands Inc. Common Stock</td>
-    <td>12</td>
-  </tr>
-  
-  <tr>
-    <td><div>AMD</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=AMD">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/AMD">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Advanced Micro Devices Inc. Common Stock</td>
-    <td>12</td>
-  </tr>
-  
-  <tr>
-    <td><div>B</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=B">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/B">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Barnes Group Inc. Common Stock</td>
-    <td>11</td>
-  </tr>
-  
-  <tr>
-    <td><div>NET</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=NET">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/NET">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Cloudflare Inc. Class A Common Stock</td>
-    <td>10</td>
-  </tr>
-  
-  <tr>
-    <td><div>PLTR</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=PLTR">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/PLTR">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Palantir Technologies Inc. Class A Common Stock</td>
-    <td>10</td>
-  </tr>
-  
-  <tr>
-    <td><div>TSM</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=TSM">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/TSM">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Taiwan Semiconductor Manufacturing Company Ltd.</td>
-    <td>10</td>
-  </tr>
-  
-  <tr>
-    <td><div>MA</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=MA">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/MA">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Mastercard Incorporated Common Stock</td>
-    <td>10</td>
-  </tr>
-  
-  <tr>
-    <td><div>M</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=M">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/M">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Macy&#x27;s Inc Common Stock</td>
-    <td>9</td>
-  </tr>
-  
-  <tr>
-    <td><div>MSFT</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=MSFT">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/MSFT">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Microsoft Corporation Common Stock</td>
-    <td>9</td>
-  </tr>
-  
-  <tr>
-    <td><div>ICLN</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=ICLN">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/ICLN">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>iShares Global Clean Energy ETF</td>
-    <td>8</td>
-  </tr>
-  
-  <tr>
-    <td><div>AMZN</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=AMZN">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/AMZN">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Amazon.com Inc. Common Stock</td>
-    <td>8</td>
-  </tr>
-  
-  <tr>
-    <td><div>HP</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=HP">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/HP">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Helmerich &amp; Payne Inc. Common Stock</td>
-    <td>8</td>
-  </tr>
-  
-  <tr>
-    <td><div>RSI</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=RSI">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/RSI">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Rush Street Interactive Inc. Class A Common Stock</td>
-    <td>8</td>
-  </tr>
-  
-  <tr>
-    <td><div>E</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=E">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/E">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>ENI S.p.A. Common Stock</td>
-    <td>7</td>
-  </tr>
-  
-  <tr>
-    <td><div>SQ</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=SQ">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/SQ">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Square Inc. Class A Common Stock</td>
-    <td>7</td>
-  </tr>
-  
-  <tr>
-    <td><div>AMC</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=AMC">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/AMC">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>AMC Entertainment Holdings Inc. Class A Common Stock</td>
-    <td>7</td>
-  </tr>
-  
-  <tr>
-    <td><div>NVDA</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=NVDA">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/NVDA">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>NVIDIA Corporation Common Stock</td>
-    <td>7</td>
-  </tr>
-  
-  <tr>
-    <td><div>FB</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=FB">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/FB">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Facebook Inc. Class A Common Stock</td>
-    <td>7</td>
-  </tr>
-  
-  <tr>
-    <td><div>PDT</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=PDT">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/PDT">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>John Hancock Premium Dividend Fund</td>
-    <td>7</td>
-  </tr>
-  
-  <tr>
-    <td><div>MARA</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=MARA">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/MARA">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Marathon Patent Group Inc. Common Stock</td>
-    <td>7</td>
-  </tr>
-  
-  <tr>
-    <td><div>ARKK</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=ARKK">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/ARKK">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>ARK Innovation ETF</td>
-    <td>6</td>
-  </tr>
-  
-  <tr>
-    <td><div>IBM</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=IBM">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/IBM">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>International Business Machines Corporation Common Stock</td>
-    <td>6</td>
-  </tr>
-  
-  <tr>
-    <td><div>U</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=U">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/U">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Unity Software Inc. Common Stock</td>
-    <td>6</td>
-  </tr>
-  
-  <tr>
-    <td><div>CRWD</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=CRWD">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/CRWD">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>CrowdStrike Holdings Inc. Class A Common Stock</td>
-    <td>6</td>
-  </tr>
-  
-  <tr>
-    <td><div>GDP</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=GDP">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/GDP">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Goodrich Petroleum Corporation Common Stock</td>
-    <td>6</td>
-  </tr>
-  
-  <tr>
-    <td><div>TD</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=TD">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/TD">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Toronto Dominion Bank (The) Common Stock</td>
-    <td>6</td>
-  </tr>
-  
-  <tr>
-    <td><div>TTCF</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=TTCF">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/TTCF">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Tattooed Chef Inc Class A Common Stock</td>
-    <td>6</td>
-  </tr>
-  
-  <tr>
-    <td><div>NOK</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=NOK">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/NOK">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Nokia Corporation Sponsored American Depositary Shares</td>
-    <td>6</td>
-  </tr>
-  
-  <tr>
-    <td><div>PM</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=PM">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/PM">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Philip Morris International Inc Common Stock</td>
-    <td>6</td>
-  </tr>
-  
-  <tr>
-    <td><div>GE</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=GE">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/GE">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>General Electric Company Common Stock</td>
-    <td>6</td>
-  </tr>
-  
-  <tr>
-    <td><div>CD</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=CD">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/CD">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Chindata Group Holdings Limited American Depositary Shares</td>
-    <td>5</td>
-  </tr>
-  
-  <tr>
-    <td><div>PYPL</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=PYPL">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/PYPL">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>PayPal Holdings Inc. Common Stock</td>
-    <td>5</td>
-  </tr>
-  
-  <tr>
-    <td><div>BA</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=BA">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/BA">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Boeing Company (The) Common Stock</td>
-    <td>5</td>
-  </tr>
-  
-  <tr>
-    <td><div>SPOT</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=SPOT">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/SPOT">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Spotify Technology S.A. Ordinary Shares</td>
-    <td>5</td>
-  </tr>
-  
-  <tr>
-    <td><div>SDC</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=SDC">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/SDC">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>SmileDirectClub Inc. Class A Common Stock</td>
-    <td>5</td>
-  </tr>
-  
-  <tr>
-    <td><div>XLI</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=XLI">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/XLI">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>Industrial Select Sector SPDR Fund</td>
-    <td>4</td>
-  </tr>
-  
-  <tr>
-    <td><div>BB</div>
-    <div>
-    <a target="_blank" href="https://finviz.com/quote.ashx?t=BB">
-        <img alt="finviz link" src="/static/images/finviz.png"
-        width="20" height="20">
-    </a>
-    <a target="_blank" href="https://finance.yahoo.com/quote/BB">
-        <img alt="yahoo link" src="/static/images/yahoo.ico"
-        width="20" height="20">
-    </a>
-    </div>
-    </td>
-    <td>BlackBerry Limited Common Stock</td>
-    <td>4</td>
-  </tr>
-  
-</table>
+    <div class="content">
+
+      <canvas id="myChart" width="300" height="75"></canvas>
+      <canvas id="mySecondChart" width="300" height="75"></canvas>
+      <table class="table table-striped" style="width:50%, text-align: center">
+        <tr>
+          <th>Symbol</th>
+          <th>Full Name</th>
+          <th>Hits (Past 12 Hrs)</th>
+        </tr>
+
+        <tr>
+          <td>
+            <div>V</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=V">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/V">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Visa Inc.</td>
+          <td>22</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>BABA</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=BABA">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/BABA">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Alibaba Group Holding Limited American Depositary Shares each representing eight Ordinary share</td>
+          <td>22</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>QQQ</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=QQQ">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/QQQ">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Invesco QQQ</td>
+          <td>20</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>AAPL</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=AAPL">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/AAPL">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Apple Inc. Common Stock</td>
+          <td>19</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>T</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=T">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/T">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>AT&amp;T Inc.</td>
+          <td>18</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>USD</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=USD">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/USD">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>ProShares Ultra Semiconductors</td>
+          <td>17</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>GME</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=GME">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/GME">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>GameStop Corporation Common Stock</td>
+          <td>16</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>TSLA</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=TSLA">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/TSLA">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Tesla Inc. Common Stock</td>
+          <td>16</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>TA</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=TA">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/TA">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>TravelCenters of America Inc. Common Stock</td>
+          <td>15</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>CRSR</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=CRSR">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/CRSR">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Corsair Gaming Inc. Common Stock</td>
+          <td>15</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>ATH</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=ATH">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/ATH">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Athene Holding Ltd. Class A Common Shares</td>
+          <td>14</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>USA</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=USA">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/USA">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Liberty All-Star Equity Fund Common Stock</td>
+          <td>14</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>CEO</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=CEO">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/CEO">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>CNOOC Limited Common Stock</td>
+          <td>12</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>SWBI</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=SWBI">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/SWBI">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Smith &amp; Wesson Brands Inc. Common Stock</td>
+          <td>12</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>AMD</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=AMD">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/AMD">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Advanced Micro Devices Inc. Common Stock</td>
+          <td>12</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>B</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=B">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/B">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Barnes Group Inc. Common Stock</td>
+          <td>11</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>NET</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=NET">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/NET">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Cloudflare Inc. Class A Common Stock</td>
+          <td>10</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>PLTR</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=PLTR">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/PLTR">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Palantir Technologies Inc. Class A Common Stock</td>
+          <td>10</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>TSM</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=TSM">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/TSM">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Taiwan Semiconductor Manufacturing Company Ltd.</td>
+          <td>10</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>MA</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=MA">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/MA">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Mastercard Incorporated Common Stock</td>
+          <td>10</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>M</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=M">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/M">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Macy&#x27;s Inc Common Stock</td>
+          <td>9</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>MSFT</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=MSFT">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/MSFT">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Microsoft Corporation Common Stock</td>
+          <td>9</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>ICLN</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=ICLN">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/ICLN">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>iShares Global Clean Energy ETF</td>
+          <td>8</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>AMZN</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=AMZN">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/AMZN">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Amazon.com Inc. Common Stock</td>
+          <td>8</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>HP</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=HP">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/HP">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Helmerich &amp; Payne Inc. Common Stock</td>
+          <td>8</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>RSI</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=RSI">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/RSI">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Rush Street Interactive Inc. Class A Common Stock</td>
+          <td>8</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>E</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=E">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/E">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>ENI S.p.A. Common Stock</td>
+          <td>7</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>SQ</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=SQ">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/SQ">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Square Inc. Class A Common Stock</td>
+          <td>7</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>AMC</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=AMC">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/AMC">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>AMC Entertainment Holdings Inc. Class A Common Stock</td>
+          <td>7</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>NVDA</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=NVDA">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/NVDA">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>NVIDIA Corporation Common Stock</td>
+          <td>7</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>FB</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=FB">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/FB">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Facebook Inc. Class A Common Stock</td>
+          <td>7</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>PDT</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=PDT">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/PDT">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>John Hancock Premium Dividend Fund</td>
+          <td>7</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>MARA</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=MARA">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/MARA">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Marathon Patent Group Inc. Common Stock</td>
+          <td>7</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>ARKK</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=ARKK">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/ARKK">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>ARK Innovation ETF</td>
+          <td>6</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>IBM</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=IBM">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/IBM">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>International Business Machines Corporation Common Stock</td>
+          <td>6</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>U</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=U">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/U">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Unity Software Inc. Common Stock</td>
+          <td>6</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>CRWD</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=CRWD">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/CRWD">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>CrowdStrike Holdings Inc. Class A Common Stock</td>
+          <td>6</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>GDP</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=GDP">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/GDP">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Goodrich Petroleum Corporation Common Stock</td>
+          <td>6</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>TD</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=TD">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/TD">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Toronto Dominion Bank (The) Common Stock</td>
+          <td>6</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>TTCF</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=TTCF">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/TTCF">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Tattooed Chef Inc Class A Common Stock</td>
+          <td>6</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>NOK</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=NOK">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/NOK">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Nokia Corporation Sponsored American Depositary Shares</td>
+          <td>6</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>PM</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=PM">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/PM">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Philip Morris International Inc Common Stock</td>
+          <td>6</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>GE</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=GE">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/GE">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>General Electric Company Common Stock</td>
+          <td>6</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>CD</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=CD">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/CD">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Chindata Group Holdings Limited American Depositary Shares</td>
+          <td>5</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>PYPL</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=PYPL">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/PYPL">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>PayPal Holdings Inc. Common Stock</td>
+          <td>5</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>BA</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=BA">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/BA">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Boeing Company (The) Common Stock</td>
+          <td>5</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>SPOT</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=SPOT">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/SPOT">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Spotify Technology S.A. Ordinary Shares</td>
+          <td>5</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>SDC</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=SDC">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/SDC">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>SmileDirectClub Inc. Class A Common Stock</td>
+          <td>5</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>XLI</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=XLI">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/XLI">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>Industrial Select Sector SPDR Fund</td>
+          <td>4</td>
+        </tr>
+
+        <tr>
+          <td>
+            <div>BB</div>
+            <div>
+              <a target="_blank" href="https://finviz.com/quote.ashx?t=BB">
+                <img alt="finviz link" src="/static/images/finviz.png" width="20" height="20">
+              </a>
+              <a target="_blank" href="https://finance.yahoo.com/quote/BB">
+                <img alt="yahoo link" src="/static/images/yahoo.ico" width="20" height="20">
+              </a>
+            </div>
+          </td>
+          <td>BlackBerry Limited Common Stock</td>
+          <td>4</td>
+        </tr>
+
+      </table>
 
 
 
-        </div>
-    </div><!-- /.container -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+    </div>
+  </div><!-- /.container -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap-confirmation2/dist/bootstrap-confirmation.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/bootstrap-confirmation2/dist/bootstrap-confirmation.min.js"></script>
   <script>
-  $(document).ready(function () {
-    $('[data-toggle="tooltip"]').tooltip().addClass('tt');
-    $('.data-table').DataTable({
+    $(document).ready(function () {
+      $('[data-toggle="tooltip"]').tooltip().addClass('tt');
+      $('.data-table').DataTable({
         paging: false,
         order: []
-    });
-    $('[data-toggle=confirmation]').confirmation({
-      rootSelector: '[data-toggle=confirmation]',
-      // other options
-    });
-  })
+      });
+      $('[data-toggle=confirmation]').confirmation({
+        rootSelector: '[data-toggle=confirmation]',
+        // other options
+      });
+    })
   </script>
-  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js" integrity="sha512-zO8oeHCxetPn1Hd9PdDleg5Tw1bAaP0YmNvPY8CwcRyUk7d7/+nyElmFrB6f7vg4f7Fv4sui1mcep8RIEShczg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js" integrity="sha512-SuxO9djzjML6b9w9/I07IWnLnQhgyYVSpHZx0JV97kGBfTIsUYlWflyuW4ypnvhBrslz1yJ3R+S14fdCWmSmSA==" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css" integrity="sha512-C7hOmCgGzihKXzyPU/z4nv97W0d9bv4ALuuEbSf6hm93myico9qa0hv4dODThvCsqQUmKmLcJmlpRmCaApr83g==" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
-<script>
-var symbol = ['GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'TSLA', 'TSLA', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'ARKK', 'GME', 'GME', 'GME', 'BB', 'BB', 'BB', 'AAPL', 'TSLA', 'AMD', 'MSFT', 'MSFT', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'GME', 'AAPL', 'AAPL', 'GME', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'GME', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'MSFT', 'MSFT', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'MSFT', 'MSFT', 'MSFT', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMD', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMC', 'AAPL', 'AAPL', 'AMC', 'AMC', 'AMC', 'AMC', 'AMC', 'AMC', 'AMC', 'AMC', 'AMC', 'AMC', 'GME', 'AMC', 'GME', 'AMC', 'GME', 'AMC', 'EA', 'CRSR', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMC', 'AMC', 'AMC', 'USD', 'USD', 'GME', 'GME', 'MSFT', 'MSFT', 'MSFT', 'IBM', 'AMD', 'IBM', 'GME', 'AAPL', 'AAPL', 'AMD', 'AMD', 'AMD', 'AMD', 'AMD', 'AMD', 'AMD', 'MSFT', 'MSFT', 'MSFT', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMD', 'AAPL', 'AAPL', 'AAPL', 'NVDA', 'NVDA', 'AMD', 'AAPL', 'AMD', 'AMD', 'AAPL', 'AAPL', 'AAPL', 'BABA', 'BABA', 'BABA', 'AAPL', 'AMD', 'AMD', 'AMD', 'AMD', 'AAPL', 'AMD', 'AMD', 'AMD', 'AAPL', 'AMD', 'AMD', 'AMD', 'AMD', 'AMD', 'AMD', 'AMD', 'AMD', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMD', 'AAPL', 'QQQ', 'TA', 'TA', 'BABA', 'BABA', 'BABA', 'BABA', 'BABA', 'BABA', 'BABA', 'AAPL', 'AAPL', 'AAPL', 'BABA', 'AMD', 'AMD', 'AMD', 'AAPL', 'AAPL', 'AMD', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'EA', 'BABA', 'BABA', 'V']
-var hits = ['119', '86', '89', '55', '64', '79', '71', '52', '75', '51', '50', '58', '81', '70', '93', '68', '106', '106', '88', '65', '53', '71', '67', '49', '56', '59', '33', '46', '75', '176', '51', '50', '59', '60', '69', '64', '67', '60', '91', '75', '73', '76', '102', '76', '82', '85', '75', '79', '70', '83', '67', '62', '66', '67', '69', '77', '88', '77', '83', '86', '89', '92', '98', '108', '116', '104', '136', '120', '105', '89', '85', '83', '94', '89', '87', '88', '90', '85', '87', '93', '92', '104', '113', '107', '97', '98', '105', '104', '101', '96', '98', '103', '98', '94', '97', '101', '93', '93', '97', '114', '127', '115', '117', '110', '98', '97', '98', '101', '111', '135', '138', '79', '89', '86', '205', '266', '268', '221', '122', '117', '94', '98', '59', '60', '77', '49', '46', '75', '49', '76', '52', '40', '41', '46', '51', '52', '56', '76', '83', '72', '61', '70', '80', '81', '82', '78', '76', '81', '75', '69', '65', '67', '75', '110', '213', '208', '189', '188', '68', '87', '88', '102', '81', '84', '68', '66', '67', '69', '77', '74', '73', '65', '70', '68', '87', '93', '87', '83', '79', '80', '70', '67', '66', '70', '69', '78', '86', '74', '116', '125', '115', '133', '97', '85', '94', '141', '146', '133', '82', '85', '87', '102', '91', '139', '142', '97', '99', '89', '90', '89', '91', '97', '105', '105', '105', '103', '105', '37', '26', '37', '37', '33', '31', '66', '64', '41', '27', '97', '114', '119', '86', '88', '89', '88', '86', '129', '142', '91', '96', '104', '90', '88', '93', '87', '34', '35', '38', '22']
-var sec_symbol = ['BB', 'AMC', 'AMC', 'AAPL', 'AMC', 'GM', 'GM', 'PLTR', 'AAPL', 'TSLA', 'AAPL', 'GME', 'MSFT', 'AMD', 'AMD', 'MSFT', 'AMD', 'AMD', 'MSFT', 'AMD', 'GME', 'ARKK', 'TSLA', 'TSLA', 'GME', 'GME', 'TSLA', 'GME', 'PLTR', 'AAPL', 'GME', 'AAPL', 'GME', 'MSFT', 'MSFT', 'GME', 'MSFT', 'GME', 'GME', 'AAPL', 'TSLA', 'MSFT', 'AAPL', 'GME', 'PLTR', 'GME', 'MSFT', 'MSFT', 'AAPL', 'MSFT', 'GME', 'MSFT', 'MSFT', 'GME', 'GME', 'AAPL', 'AAPL', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'AAPL', 'AAPL', 'AAPL', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'AMD', 'AAPL', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'PLTR', 'PLTR', 'PLTR', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'PLTR', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'GME', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'AAPL', 'AMD', 'AMD', 'GME', 'GME', 'GME', 'BB', 'BB', 'GME', 'GME', 'GME', 'GME', 'GME', 'AMC', 'GME', 'AMC', 'GME', 'AMC', 'EA', 'AMC', 'AMC', 'CRSR', 'AMC', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'AMD', 'AMD', 'AAPL', 'USD', 'IBM', 'AMD', 'IBM', 'GME', 'AAPL', 'GME', 'AMC', 'AAPL', 'AMC', 'NVDA', 'NVDA', 'NVDA', 'NVDA', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'MSFT', 'MSFT', 'AMD', 'AMD', 'AMD', 'MSFT', 'MSFT', 'MSFT', 'SPCE', 'AMD', 'MSFT', 'MSFT', 'AMD', 'MSFT', 'AMD', 'AAPL', 'AMD', 'AMD', 'MSFT', 'AMD', 'AMD', 'AAPL', 'MSFT', 'AAPL', 'AAPL', 'AMD', 'MSFT', 'BABA', 'AAPL', 'AAPL', 'AAPL', 'AMD', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMD', 'AAPL', 'SQ', 'AAPL', 'AMD', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMD', 'AMC', 'AMC', 'AMC', 'AMC', 'AMC', 'AMD', 'AMC', 'GME', 'TA', 'U', 'WISH', 'WISH', 'WISH', 'ARKK', 'AMD', 'GME', 'AAPL', 'AAPL', 'MSFT', 'MSFT', 'MSFT', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMD', 'AMD', 'AAPL', 'MSFT', 'AMD', 'AMD', 'MSFT', 'BABA', 'MSFT', 'TSLA', 'BABA']
-var sec_hits = ['35', '47', '40', '37', '35', '38', '36', '31', '32', '43', '45', '40', '42', '59', '50', '44', '47', '54', '48', '38', '52', '61', '42', '37', '55', '55', '31', '42', '51', '65', '50', '47', '50', '51', '55', '50', '46', '53', '76', '71', '67', '67', '75', '70', '64', '72', '64', '67', '66', '76', '64', '52', '55', '62', '67', '73', '77', '66', '60', '70', '69', '66', '91', '91', '106', '89', '99', '95', '101', '87', '75', '77', '87', '72', '71', '70', '75', '74', '76', '90', '83', '96', '105', '100', '84', '88', '91', '86', '92', '87', '87', '92', '85', '80', '82', '85', '83', '84', '83', '89', '88', '87', '103', '94', '87', '86', '90', '93', '101', '101', '100', '69', '79', '80', '65', '105', '96', '83', '63', '79', '57', '62', '49', '45', '47', '41', '42', '50', '38', '53', '49', '35', '39', '40', '40', '48', '50', '64', '64', '69', '57', '69', '72', '63', '62', '73', '74', '75', '52', '61', '61', '67', '63', '67', '109', '124', '122', '126', '63', '85', '78', '92', '68', '69', '56', '58', '56', '49', '56', '69', '57', '56', '56', '60', '62', '74', '74', '83', '76', '70', '61', '65', '65', '68', '61', '70', '72', '74', '67', '81', '89', '94', '89', '79', '88', '83', '84', '76', '80', '77', '83', '78', '91', '76', '73', '73', '75', '75', '75', '73', '86', '89', '84', '91', '97', '94', '96', '27', '23', '33', '27', '23', '29', '30', '30', '20', '21', '25', '27', '91', '80', '78', '86', '82', '84', '87', '89', '82', '93', '91', '85', '81', '80', '84', '31', '21', '20', '22']
 
-var ctx = document.getElementById('myChart');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+    integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js"
+    integrity="sha512-zO8oeHCxetPn1Hd9PdDleg5Tw1bAaP0YmNvPY8CwcRyUk7d7/+nyElmFrB6f7vg4f7Fv4sui1mcep8RIEShczg=="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"
+    integrity="sha512-SuxO9djzjML6b9w9/I07IWnLnQhgyYVSpHZx0JV97kGBfTIsUYlWflyuW4ypnvhBrslz1yJ3R+S14fdCWmSmSA=="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css"
+    integrity="sha512-C7hOmCgGzihKXzyPU/z4nv97W0d9bv4ALuuEbSf6hm93myico9qa0hv4dODThvCsqQUmKmLcJmlpRmCaApr83g=="
+    crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"
+    integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw=="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css"
+    integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w=="
+    crossorigin="anonymous" />
+  <script>
+    var symbol = ['GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'TSLA', 'TSLA', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'ARKK', 'GME', 'GME', 'GME', 'BB', 'BB', 'BB', 'AAPL', 'TSLA', 'AMD', 'MSFT', 'MSFT', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'GME', 'AAPL', 'AAPL', 'GME', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'GME', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'MSFT', 'MSFT', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'MSFT', 'MSFT', 'MSFT', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMD', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMC', 'AAPL', 'AAPL', 'AMC', 'AMC', 'AMC', 'AMC', 'AMC', 'AMC', 'AMC', 'AMC', 'AMC', 'AMC', 'GME', 'AMC', 'GME', 'AMC', 'GME', 'AMC', 'EA', 'CRSR', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMC', 'AMC', 'AMC', 'USD', 'USD', 'GME', 'GME', 'MSFT', 'MSFT', 'MSFT', 'IBM', 'AMD', 'IBM', 'GME', 'AAPL', 'AAPL', 'AMD', 'AMD', 'AMD', 'AMD', 'AMD', 'AMD', 'AMD', 'MSFT', 'MSFT', 'MSFT', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMD', 'AAPL', 'AAPL', 'AAPL', 'NVDA', 'NVDA', 'AMD', 'AAPL', 'AMD', 'AMD', 'AAPL', 'AAPL', 'AAPL', 'BABA', 'BABA', 'BABA', 'AAPL', 'AMD', 'AMD', 'AMD', 'AMD', 'AAPL', 'AMD', 'AMD', 'AMD', 'AAPL', 'AMD', 'AMD', 'AMD', 'AMD', 'AMD', 'AMD', 'AMD', 'AMD', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMD', 'AAPL', 'QQQ', 'TA', 'TA', 'BABA', 'BABA', 'BABA', 'BABA', 'BABA', 'BABA', 'BABA', 'AAPL', 'AAPL', 'AAPL', 'BABA', 'AMD', 'AMD', 'AMD', 'AAPL', 'AAPL', 'AMD', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'EA', 'BABA', 'BABA', 'V']
+    var hits = ['119', '86', '89', '55', '64', '79', '71', '52', '75', '51', '50', '58', '81', '70', '93', '68', '106', '106', '88', '65', '53', '71', '67', '49', '56', '59', '33', '46', '75', '176', '51', '50', '59', '60', '69', '64', '67', '60', '91', '75', '73', '76', '102', '76', '82', '85', '75', '79', '70', '83', '67', '62', '66', '67', '69', '77', '88', '77', '83', '86', '89', '92', '98', '108', '116', '104', '136', '120', '105', '89', '85', '83', '94', '89', '87', '88', '90', '85', '87', '93', '92', '104', '113', '107', '97', '98', '105', '104', '101', '96', '98', '103', '98', '94', '97', '101', '93', '93', '97', '114', '127', '115', '117', '110', '98', '97', '98', '101', '111', '135', '138', '79', '89', '86', '205', '266', '268', '221', '122', '117', '94', '98', '59', '60', '77', '49', '46', '75', '49', '76', '52', '40', '41', '46', '51', '52', '56', '76', '83', '72', '61', '70', '80', '81', '82', '78', '76', '81', '75', '69', '65', '67', '75', '110', '213', '208', '189', '188', '68', '87', '88', '102', '81', '84', '68', '66', '67', '69', '77', '74', '73', '65', '70', '68', '87', '93', '87', '83', '79', '80', '70', '67', '66', '70', '69', '78', '86', '74', '116', '125', '115', '133', '97', '85', '94', '141', '146', '133', '82', '85', '87', '102', '91', '139', '142', '97', '99', '89', '90', '89', '91', '97', '105', '105', '105', '103', '105', '37', '26', '37', '37', '33', '31', '66', '64', '41', '27', '97', '114', '119', '86', '88', '89', '88', '86', '129', '142', '91', '96', '104', '90', '88', '93', '87', '34', '35', '38', '22']
+    var sec_symbol = ['BB', 'AMC', 'AMC', 'AAPL', 'AMC', 'GM', 'GM', 'PLTR', 'AAPL', 'TSLA', 'AAPL', 'GME', 'MSFT', 'AMD', 'AMD', 'MSFT', 'AMD', 'AMD', 'MSFT', 'AMD', 'GME', 'ARKK', 'TSLA', 'TSLA', 'GME', 'GME', 'TSLA', 'GME', 'PLTR', 'AAPL', 'GME', 'AAPL', 'GME', 'MSFT', 'MSFT', 'GME', 'MSFT', 'GME', 'GME', 'AAPL', 'TSLA', 'MSFT', 'AAPL', 'GME', 'PLTR', 'GME', 'MSFT', 'MSFT', 'AAPL', 'MSFT', 'GME', 'MSFT', 'MSFT', 'GME', 'GME', 'AAPL', 'AAPL', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'AAPL', 'AAPL', 'AAPL', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'AMD', 'AAPL', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'PLTR', 'PLTR', 'PLTR', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'PLTR', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'GME', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'MSFT', 'AAPL', 'AMD', 'AMD', 'GME', 'GME', 'GME', 'BB', 'BB', 'GME', 'GME', 'GME', 'GME', 'GME', 'AMC', 'GME', 'AMC', 'GME', 'AMC', 'EA', 'AMC', 'AMC', 'CRSR', 'AMC', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'GME', 'AMD', 'AMD', 'AAPL', 'USD', 'IBM', 'AMD', 'IBM', 'GME', 'AAPL', 'GME', 'AMC', 'AAPL', 'AMC', 'NVDA', 'NVDA', 'NVDA', 'NVDA', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'MSFT', 'MSFT', 'AMD', 'AMD', 'AMD', 'MSFT', 'MSFT', 'MSFT', 'SPCE', 'AMD', 'MSFT', 'MSFT', 'AMD', 'MSFT', 'AMD', 'AAPL', 'AMD', 'AMD', 'MSFT', 'AMD', 'AMD', 'AAPL', 'MSFT', 'AAPL', 'AAPL', 'AMD', 'MSFT', 'BABA', 'AAPL', 'AAPL', 'AAPL', 'AMD', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMD', 'AAPL', 'SQ', 'AAPL', 'AMD', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMD', 'AMC', 'AMC', 'AMC', 'AMC', 'AMC', 'AMD', 'AMC', 'GME', 'TA', 'U', 'WISH', 'WISH', 'WISH', 'ARKK', 'AMD', 'GME', 'AAPL', 'AAPL', 'MSFT', 'MSFT', 'MSFT', 'AAPL', 'AAPL', 'AAPL', 'AAPL', 'AMD', 'AMD', 'AAPL', 'MSFT', 'AMD', 'AMD', 'MSFT', 'BABA', 'MSFT', 'TSLA', 'BABA']
+    var sec_hits = ['35', '47', '40', '37', '35', '38', '36', '31', '32', '43', '45', '40', '42', '59', '50', '44', '47', '54', '48', '38', '52', '61', '42', '37', '55', '55', '31', '42', '51', '65', '50', '47', '50', '51', '55', '50', '46', '53', '76', '71', '67', '67', '75', '70', '64', '72', '64', '67', '66', '76', '64', '52', '55', '62', '67', '73', '77', '66', '60', '70', '69', '66', '91', '91', '106', '89', '99', '95', '101', '87', '75', '77', '87', '72', '71', '70', '75', '74', '76', '90', '83', '96', '105', '100', '84', '88', '91', '86', '92', '87', '87', '92', '85', '80', '82', '85', '83', '84', '83', '89', '88', '87', '103', '94', '87', '86', '90', '93', '101', '101', '100', '69', '79', '80', '65', '105', '96', '83', '63', '79', '57', '62', '49', '45', '47', '41', '42', '50', '38', '53', '49', '35', '39', '40', '40', '48', '50', '64', '64', '69', '57', '69', '72', '63', '62', '73', '74', '75', '52', '61', '61', '67', '63', '67', '109', '124', '122', '126', '63', '85', '78', '92', '68', '69', '56', '58', '56', '49', '56', '69', '57', '56', '56', '60', '62', '74', '74', '83', '76', '70', '61', '65', '65', '68', '61', '70', '72', '74', '67', '81', '89', '94', '89', '79', '88', '83', '84', '76', '80', '77', '83', '78', '91', '76', '73', '73', '75', '75', '75', '73', '86', '89', '84', '91', '97', '94', '96', '27', '23', '33', '27', '23', '29', '30', '30', '20', '21', '25', '27', '91', '80', '78', '86', '82', '84', '87', '89', '82', '93', '91', '85', '81', '80', '84', '31', '21', '20', '22']
+
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
         labels: symbol,
         datasets: [{
-            label: 'Highest Tickers (Past Week)',
-            data: hits,
-            backgroundColor: '#5EBC00',
+          label: 'Highest Tickers (Past Week)',
+          data: hits,
+          backgroundColor: '#5EBC00',
         }]
-    },
-    options: {
+      },
+      options: {
         scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
         }
-    }
-});
-var ctx = document.getElementById('mySecondChart');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
+      }
+    });
+    var ctx = document.getElementById('mySecondChart');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
         labels: sec_symbol,
         datasets: [{
-            label: 'Second Highest Tickers (Past Week)',
-            backgroundColor: "#0000ff",
-            data: sec_hits
+          label: 'Second Highest Tickers (Past Week)',
+          backgroundColor: "#0000ff",
+          data: sec_hits
         }]
-    },
-    options: {
+      },
+      options: {
         scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
         }
-    }
-});
-</script>
+      }
+    });
+  </script>
 
-  </body>
+</body>
+
 </html>
